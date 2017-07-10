@@ -35,73 +35,85 @@ class ConvLSTMCell(nn.Module):  # Stack-2, Stack-3 would have an extra Conv/BN
         self.padding = (padding, padding) if isinstance(padding, int) else padding
 
         self.Wxi = nn.Sequential(
-            nn.Conv2d(input_filters, hidden_filters, kernel, padding=padding, stride=stride),
+            nn.Conv2d(input_filters, hidden_filters, self.kernel, padding=self.padding, stride=self.stride),
             nn.BatchNorm2d(hidden_filters),
             nn.ReLU(),
-            nn.Conv2d(hidden_filters, hidden_filters, kernel, padding=math.floor(kernel/2)),  # don't reduce size now
+            nn.Conv2d(hidden_filters, hidden_filters, self.kernel,
+                      padding=(math.floor(self.kernel[0]/2), math.floor(self.kernel[1]/2))),  # don't reduce size now
             nn.BatchNorm2d(hidden_filters),
             nn.ReLU()
         )
 
         self.Whi = nn.Sequential(
-            nn.Conv2d(hidden_filters, hidden_filters, kernel, padding=math.floor(kernel/2)),  # stride on this too?
+            nn.Conv2d(hidden_filters, hidden_filters, self.kernel,
+                      padding=(math.floor(self.kernel[0]/2), math.floor(self.kernel[1]/2))),
             nn.BatchNorm2d(hidden_filters),
             nn.ReLU(),
-            nn.Conv2d(hidden_filters, hidden_filters, kernel, padding=math.floor(kernel / 2)),
+            nn.Conv2d(hidden_filters, hidden_filters, self.kernel,
+                      padding=(math.floor(self.kernel[0]/2), math.floor(self.kernel[1]/2))),
             nn.BatchNorm2d(hidden_filters),
             nn.ReLU()
         )
 
         self.Wxf = nn.Sequential(
-            nn.Conv2d(input_filters, hidden_filters, kernel, padding=padding, stride=stride),
+            nn.Conv2d(input_filters, hidden_filters, self.kernel, padding=self.padding, stride=self.stride),
             nn.BatchNorm2d(hidden_filters),
             nn.ReLU(),
-            nn.Conv2d(hidden_filters, hidden_filters, kernel, padding=math.floor(kernel / 2)),
+            nn.Conv2d(hidden_filters, hidden_filters, self.kernel,
+                      padding=(math.floor(self.kernel[0]/2), math.floor(self.kernel[1]/2))),
             nn.BatchNorm2d(hidden_filters),
             nn.ReLU()
         )
 
         self.Whf = nn.Sequential(
-            nn.Conv2d(hidden_filters, hidden_filters, kernel, padding=math.floor(kernel/2)),
+            nn.Conv2d(hidden_filters, hidden_filters, self.kernel,
+                      padding=(math.floor(self.kernel[0]/2), math.floor(self.kernel[1]/2))),
             nn.BatchNorm2d(hidden_filters),
             nn.ReLU(),
-            nn.Conv2d(hidden_filters, hidden_filters, kernel, padding=math.floor(kernel / 2)),
+            nn.Conv2d(hidden_filters, hidden_filters, self.kernel,
+                      padding=(math.floor(self.kernel[0]/2), math.floor(self.kernel[1]/2))),
             nn.BatchNorm2d(hidden_filters),
             nn.ReLU()
         )
 
         self.Wxc = nn.Sequential(
-            nn.Conv2d(input_filters, hidden_filters, kernel, padding=padding, stride=stride),
+            nn.Conv2d(input_filters, hidden_filters, self.kernel, padding=self.padding, stride=self.stride),
             nn.BatchNorm2d(hidden_filters),
             nn.ReLU(),
-            nn.Conv2d(hidden_filters, hidden_filters, kernel, padding=math.floor(kernel / 2)),
+            nn.Conv2d(hidden_filters, hidden_filters, self.kernel,
+                      padding=(math.floor(self.kernel[0]/2), math.floor(self.kernel[1]/2))),
             nn.BatchNorm2d(hidden_filters),
             nn.ReLU()
         )
 
         self.Whc = nn.Sequential(
-            nn.Conv2d(hidden_filters, hidden_filters, kernel, padding=math.floor(kernel/2)),
+            nn.Conv2d(hidden_filters, hidden_filters, self.kernel,
+                      padding=(math.floor(self.kernel[0]/2), math.floor(self.kernel[1]/2))),
             nn.BatchNorm2d(hidden_filters),
             nn.ReLU(),
-            nn.Conv2d(hidden_filters, hidden_filters, kernel, padding=math.floor(kernel / 2)),
+            nn.Conv2d(hidden_filters, hidden_filters, self.kernel,
+                      padding=(math.floor(self.kernel[0]/2), math.floor(self.kernel[1]/2))),
             nn.BatchNorm2d(hidden_filters),
             nn.ReLU()
         )
 
         self.Wxo = nn.Sequential(
-            nn.Conv2d(input_filters, hidden_filters, kernel, padding=padding, stride=stride),
+            nn.Conv2d(input_filters, hidden_filters, self.kernel, padding=self.padding, stride=self.stride),
             nn.BatchNorm2d(hidden_filters),
             nn.ReLU(),
-            nn.Conv2d(hidden_filters, hidden_filters, kernel, padding=math.floor(kernel / 2)),
+            nn.Conv2d(hidden_filters, hidden_filters, self.kernel,
+                      padding=(math.floor(self.kernel[0]/2), math.floor(self.kernel[1]/2))),
             nn.BatchNorm2d(hidden_filters),
             nn.ReLU()
         )
 
         self.Who = nn.Sequential(
-            nn.Conv2d(hidden_filters, hidden_filters, kernel, padding=math.floor(kernel/2)),
+            nn.Conv2d(hidden_filters, hidden_filters, self.kernel,
+                      padding=(math.floor(self.kernel[0]/2), math.floor(self.kernel[1]/2))),
             nn.BatchNorm2d(hidden_filters),
             nn.ReLU(),
-            nn.Conv2d(hidden_filters, hidden_filters, kernel, padding=math.floor(kernel / 2)),
+            nn.Conv2d(hidden_filters, hidden_filters, self.kernel,
+                      padding=(math.floor(self.kernel[0]/2), math.floor(self.kernel[1]/2))),
             nn.BatchNorm2d(hidden_filters),
             nn.ReLU()
         )
